@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  mysql-db:
+    image: mysql:8.1
+    container_name: mysql-db-task-app
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # 🌟 CRITICAL FIX 1: Add a health check to know when MySQL is ready.
+    healthcheck:
+      # Use the environment variables defined in .env for credentials
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "$${MYSQL_USER}", "-p$${MYSQL_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  task-microservice:
+    build: .
+    container_name: task-microservice
+    restart: on-failure
+    ports:
+      - "9090:8080"
+    env_file:
+      - .env
+    environment:
+      APP_JWTSECRET: c2VjdXJlLXNwcmluZ2Jvb3Qtc2VjcmV0LWlzLWxvbmctaGFyZC1iYXNlNjQtZW5jb2RlZC1rZXktZm9yLUpXVF9IUzUxMi10b2tlbnMtb25seQ==
+      APP_JWTEXPIRATIONMS: "86400000"
+    # 💥 Recommended: REMOVE redundant/conflicting environment block.
+    # The variables are already loaded via env_file.
+    # environment:
+    #   SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+    #   ...
+    #   SECRET_KEY: ${SECRET_KEY}
+    #   EXPIRATION_TIME: ${EXPIRATION_TIME}
+
+    # 🌟 CRITICAL FIX 2: Wait until the database service is fully healthy.
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
