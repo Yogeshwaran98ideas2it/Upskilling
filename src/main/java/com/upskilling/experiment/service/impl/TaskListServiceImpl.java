@@ -18,13 +18,26 @@ import com.upskilling.experiment.repository.ProjectRepository;
 import com.upskilling.experiment.repository.TaskListRepository;
 import com.upskilling.experiment.service.TaskListService;
 
+/**
+ * Service implementation for task list management business logic.
+ * Handles CRUD operations for task lists (Kanban board columns) within projects.
+ * 
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class TaskListServiceImpl implements TaskListService {
 
+    /** Repository for database operations on TaskList entities */
     private final TaskListRepository taskListRepository;
+    
+    /** Repository for database operations on Project entities */
     private final ProjectRepository projectRepository;
+    
+    /** Mapper for converting between TaskList entities and DTOs */
     private final TaskListMapper taskListMapper;
 
     @Override

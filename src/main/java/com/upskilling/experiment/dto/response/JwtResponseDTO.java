@@ -2,6 +2,13 @@ package com.upskilling.experiment.dto.response;
 
 import lombok.Data;
 
+/**
+ * DTO for JWT response containing authentication token and user details.
+ *
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Data
 public class JwtResponseDTO {
     private String token;

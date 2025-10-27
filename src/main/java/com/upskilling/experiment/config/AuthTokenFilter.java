@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.upskilling.experiment.service.impl.CustomUserDetailsServiceImpl;
 
 
+
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
 
@@ -30,6 +31,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,

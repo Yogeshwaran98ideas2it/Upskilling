@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   mysql-db:
-    image: mysql:8.1
+    image: mysql:8.0
     container_name: mysql-db-task-app
     restart: always
     env_file:
@@ -30,18 +30,13 @@ services:
     environment:
       APP_JWTSECRET: c2VjdXJlLXNwcmluZ2Jvb3Qtc2VjcmV0LWlzLWxvbmctaGFyZC1iYXNlNjQtZW5jb2RlZC1rZXktZm9yLUpXVF9IUzUxMi10b2tlbnMtb25seQ==
       APP_JWTEXPIRATIONMS: "86400000"
-    # 💥 Recommended: REMOVE redundant/conflicting environment block.
-    # The variables are already loaded via env_file.
-    # environment:
-    #   SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-    #   ...
-    #   SECRET_KEY: ${SECRET_KEY}
-    #   EXPIRATION_TIME: ${EXPIRATION_TIME}
-
     # 🌟 CRITICAL FIX 2: Wait until the database service is fully healthy.
     depends_on:
       mysql-db:
         condition: service_healthy
+    # 📁 FIX: Mount upload directory to persist files on host machine
+    volumes:
+      - ./uploads:/app/uploads
 
 volumes:
   mysql-data:

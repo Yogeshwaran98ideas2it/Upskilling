@@ -8,6 +8,13 @@ import jakarta.validation.constraints.Size;
 
 import com.upskilling.experiment.enums.UserRole;
 
+/**
+ * DTO for user registration.
+ *
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Data
 public class RegisterRequestDTO {
     @NotBlank
@@ -21,5 +28,7 @@ public class RegisterRequestDTO {
     @NotBlank(message = "Email cannot be empty")
     @Email(message = "Must be a valid email format")
     private String email;
+
+    private UserRole role;
 
 }

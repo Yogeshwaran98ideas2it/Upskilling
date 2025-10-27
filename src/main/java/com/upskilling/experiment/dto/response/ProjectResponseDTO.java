@@ -14,7 +14,6 @@ public class ProjectResponseDTO {
     private String title;
     private String description;
     private LocalDateTime createdAt;
-    // Relationships
     private UserResponseDTO creator;
     private List<UserResponseDTO> members;
 }

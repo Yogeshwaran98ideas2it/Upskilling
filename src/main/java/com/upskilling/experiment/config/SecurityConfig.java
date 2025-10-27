@@ -23,13 +23,32 @@ import com.upskilling.experiment.enums.UserRole;
 import com.upskilling.experiment.service.impl.CustomUserDetailsServiceImpl;
 
 
+/**
+ * Spring Security configuration for JWT-based authentication.
+ * Configures security filter chain, authentication providers, and role-based access control.
+ * Defines public endpoints (auth, API docs) and secured endpoints.
+ * Implements stateless authentication with JWT tokens.
+ * 
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /** Custom user details service for authentication */
     private final CustomUserDetailsServiceImpl userDetailsService;
+    
+    /** JWT token filter for request authentication */
     private final AuthTokenFilter authTokenFilter;
 
+    /**
+     * Constructor for dependency injection
+     * 
+     * @param userDetailsService The user details service to be injected
+     * @param authTokenFilter The JWT token filter to be injected
+     */
     public SecurityConfig(CustomUserDetailsServiceImpl userDetailsService, AuthTokenFilter authTokenFilter) {
         this.userDetailsService = userDetailsService;
         this.authTokenFilter = authTokenFilter;

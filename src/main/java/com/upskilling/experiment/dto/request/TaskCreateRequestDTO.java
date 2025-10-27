@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * DTO for creating a new Task.
+ *
  */
 @Data
 public class TaskCreateRequestDTO {

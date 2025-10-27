@@ -4,6 +4,21 @@ server:
 spring:
   application:
     name: task-management-system
+  mail:
+    host: smtp.gmail.com  # <-- Check this (e.g., smtp.office365.com, smtp.mailgun.org)
+    port: 587             # <-- 587 is standard for STARTTLS; 465 is for SSL
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true  # <-- Must be true for port 587
+          timeout: 5000
+  file:
+    upload:
+      upload-dir: ${UPLOAD_DIR}
 
   datasource:
     url: ${SPRING_DATASOURCE_URL}
@@ -19,8 +34,31 @@ spring:
 
 logging:
   level:
+    root: INFO
+    com.upskilling.experiment: DEBUG
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.mail: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.web.firewall: DEBUG
+  
+  # File logging configuration
+  file:
+    name: ./logs/application.log
+  
+  # Log pattern
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  
+  # Log file settings
+  logback:
+    rollingpolicy:
+      max-history: 30
+      max-file-size: 10MB
+      total-size-cap: 1GB
+      file-name-pattern: "./logs/application-%d{yyyy-MM-dd}.%i.log"
 
 springdoc:
   api-docs:

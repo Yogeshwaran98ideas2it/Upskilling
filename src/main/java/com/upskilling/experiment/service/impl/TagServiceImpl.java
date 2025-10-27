@@ -18,12 +18,24 @@ import com.upskilling.experiment.mapper.TagMapper;
 import com.upskilling.experiment.repository.TagRepository;
 import com.upskilling.experiment.service.TagService;
 
+/**
+ * Service implementation for tag management business logic.
+ * Handles CRUD operations for tags and provides utility methods for tag creation/finding.
+ * Tags are reusable across tasks and are case-insensitive for uniqueness.
+ * 
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class TagServiceImpl implements TagService {
 
+    /** Repository for database operations on Tag entities */
     private final TagRepository tagRepository;
+    
+    /** Mapper for converting between Tag entities and DTOs */
     private final TagMapper tagMapper;
 
     @Override

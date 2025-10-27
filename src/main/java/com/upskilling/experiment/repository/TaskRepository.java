@@ -1,3 +1,12 @@
+/**
+ * Repository interface for database operations on Task entities.
+ * Extends JpaRepository to provide CRUD operations.
+ * Can be extended with custom query methods for task filtering and searching.
+ * 
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 package com.upskilling.experiment.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,18 +1,24 @@
 package com.upskilling.experiment.dto.request;
 
 
+import java.time.LocalDate;
+import java.util.Set;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import java.time.LocalDate;
-import java.util.Set;
 
 import com.upskilling.experiment.enums.TaskPriority;
 import com.upskilling.experiment.enums.TaskStatus;
-import com.upskilling.experiment.enums.TaskType;
-import com.upskilling.experiment.enums.TicketType;
 
+/**
+ * DTO for updating an existing Task.
+ *
+ * @author Task Management System
+ * @version 1.0
+ * @since 1.0
+ */
 @Data
 public class TaskUpdateRequestDTO {
     @NotBlank(message = "Task title cannot be empty")
